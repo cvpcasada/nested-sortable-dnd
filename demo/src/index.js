@@ -4,12 +4,9 @@ import {render} from 'react-dom'
 import {DragDropContext} from 'react-dnd';
 import HTML5DragDropBackend from 'react-dnd-html5-backend';
 
-//import {TreeView} from 'react-dnd-treeview'
 import TreeView from '../../src'
 
 import styles from './styles.css';
-
-console.log(styles);
 
 const recursivelyUpdateNode = (node, listUpdateFunc, nodeUpdateFunc) => {
 
@@ -130,7 +127,6 @@ export class App extends Component {
   };
 
   setStateWithLog = newState => {
-    console.log("new state: ", newState);
     this.setState(newState);
   };
 

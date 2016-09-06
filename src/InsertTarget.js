@@ -30,7 +30,7 @@ const handleCanDrop = (props, monitor, item) => (
   ) && !item.allSourceIDs.contains(props.parentNode ? props.parentNode.id : null)
 );
 
-const handleDrop = (props, monitor, component, item) => (
+const handleDrop = (props, monitor, component, item) => {
   props.onMoveNode({
     oldParentNode: item.parentNode,
     oldParentChildIndex: item.parentChildIndex,
@@ -39,12 +39,13 @@ const handleDrop = (props, monitor, component, item) => (
     newParentNode: props.parentNode,
     newParentChildIndex: props.parentChildIndex,
     newPrecedingNode: props.precedingNode,
-  }),
-    ({
-      parentNode: props.parentNode,
-      parentChildIndex: props.parentChildIndex,
-    })
-);
+  });
+
+  return {
+    parentNode: props.parentNode,
+    parentChildIndex: props.parentChildIndex,
+  };
+};
 
 const nodeTarget = {
   drop: (props, monitor, component) => monitor.didDrop()
@@ -60,6 +61,6 @@ const collectNodeDropProps =
     isDropping: monitor.isOver({shallow: true}) && monitor.canDrop(),
   });
 
-const DropedTarget = DropTarget([TYPE], nodeTarget, collectNodeDropProps);
+export const DroppedTarget = DropTarget([TYPE], nodeTarget, collectNodeDropProps);
 
-export const DroppableTreeViewInsertTarget = DropedTarget(TreeViewInsertTarget);
+export const DroppableTreeViewInsertTarget = DroppedTarget(TreeViewInsertTarget);

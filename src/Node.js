@@ -2,7 +2,7 @@ import Immutable from "immutable";
 import cx from "classnames";
 import React, {Component} from "react";
 import {DragSource} from "react-dnd";
-import {TYPE, DroppableTreeViewInsertTarget} from "./InsertTarget";
+import {TYPE, DroppedTarget, DroppableTreeViewInsertTarget} from "./InsertTarget";
 
 const TreeViewItem = (props) => (
   props.connectDragSource(
@@ -10,6 +10,7 @@ const TreeViewItem = (props) => (
       className={
         cx(props.classNames.node, {
           [props.classNames.nodeDragging]: props.isDragging,
+          [props.classNames.nodeDropping]: props.isDropping
         }) }
       key={ props.node.id }
     >
@@ -56,6 +57,12 @@ const collectNodeDragProps = (connect, monitor) => ({
 
 export const DraggableTreeViewItem = DragSource(TYPE, nodeSource, collectNodeDragProps)(TreeViewItem);
 
+const DroppableTreeViewItem = DroppedTarget((props) => (
+  props.connectDropTarget(
+    <DraggableTreeViewItem {...props} />
+  )
+));
+
 const nodesWithPredecessors = (nodes) => {
   return (
     nodes
@@ -75,44 +82,62 @@ const nodesWithPredecessors = (nodes) => {
 //   z-index: 2;
 // }
 
-export const TreeViewItemList = (props) => (
-  <div className={ props.classNames.nodeList }>
-    {
-      nodesWithPredecessors(props.nodes).map((node, index) =>
-        <div
-          key={ node.node.id }
-          style={ {position: "relative"} }
-          className={ props.classNames.nodePositioningWrapper }
-        >
-          {
-            index === 0
-              ? <DroppableTreeViewInsertTarget
-              insertBefore={ true }
+export const TreeViewItemList = (props) => {
+  const withPredecessors = nodesWithPredecessors(props.nodes);
+  return (
+    <div className={ props.classNames.nodeList }>
+      {
+        withPredecessors.map((node, index) =>
+          <div
+            key={ node.node.id }
+            style={ {position: "relative"} }
+            className={ props.classNames.nodePositioningWrapper }
+          >
+            {
+              index === 0
+                ? <DroppableTreeViewInsertTarget
+                insertBefore={ true }
+                parentNode={ props.parentNode }
+                parentChildIndex={ index }
+                precedingNode={ null }
+                onMoveNode={ props.onMoveNode }
+              />
+                : null
+            }
+
+            <DroppableTreeViewInsertTarget
+              insertBefore={ false }
               parentNode={ props.parentNode }
-              parentChildIndex={ index }
-              precedingNode={ null }
+              parentChildIndex={ index + 1 }
+              precedingNode={ node.node }
               onMoveNode={ props.onMoveNode }
             />
-              : null
-          }
-          <DroppableTreeViewInsertTarget
-            insertBefore={ false }
-            parentNode={ props.parentNode }
-            parentChildIndex={ index + 1 }
-            precedingNode={ node.node }
-            onMoveNode={ props.onMoveNode }
-          />
-          <DraggableTreeViewItem
-            parentNode={ props.parentNode }
-            parentChildIndex={ index }
-            precedingNode={ node.precedingNode }
-            node={ node.node }
-            classNames={ props.classNames }
-            renderNode={ props.renderNode }
-            onMoveNode={ props.onMoveNode }
-          />
-        </div>
-      )
-    }
-  </div>
-);
+            
+            {
+              (node.node.children && node.node.children.size === 0) ?
+                <DroppableTreeViewItem
+                  parentNode={ node.node }
+                  parentChildIndex={ index }
+                  precedingNode={ null }
+                  node={ node.node }
+                  classNames={ props.classNames }
+                  renderNode={ props.renderNode }
+                  onMoveNode={ props.onMoveNode }
+                />
+                : <DraggableTreeViewItem
+                parentNode={ props.parentNode }
+                parentChildIndex={ index }
+                precedingNode={ node.precedingNode }
+                node={ node.node }
+                classNames={ props.classNames }
+                renderNode={ props.renderNode }
+                onMoveNode={ props.onMoveNode }
+              />
+            }
+          </div>
+        )
+      }
+    </div>
+  );
+
+};

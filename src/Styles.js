@@ -27,9 +27,8 @@ export const NormalStyles = {
   insertTargetMarkerDropping: {
     boxSizing: "border-box",
     width: "100%",
-    height: "3px",
-    borderRadius: "2px",
-    background: "#5C5C61",
+    height: "6px",
+    background: "#B4B4B4",
     alignSelf: "center",
   }
 };

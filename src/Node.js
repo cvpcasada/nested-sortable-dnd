@@ -2,7 +2,7 @@ import Immutable from "immutable";
 import cx from "classnames";
 import React, {Component} from "react";
 import {DragSource} from "react-dnd";
-import {TYPE, DroppedTarget, DroppableTreeViewInsertTarget} from "./InsertTarget";
+import {TYPE, DroppableTreeViewInsertTarget} from "./InsertTarget";
 import Styles from './Styles';
 const TreeViewItem = (props) => (
   props.connectDragSource(
@@ -55,14 +55,6 @@ const collectNodeDragProps = (connect, monitor) => ({
 });
 
 export const DraggableTreeViewItem = DragSource(TYPE, nodeSource, collectNodeDragProps)(TreeViewItem);
-
-const DroppableTreeViewItem = DroppedTarget((props) => (
-  props.connectDropTarget(
-    <div style={props.isDropping ? {background: 'blue'} : {}}>
-      <DraggableTreeViewItem {...props} />
-    </div>
-  )
-));
 
 const nodesWithPredecessors = (nodes) => {
   return (

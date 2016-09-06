@@ -1,6 +1,6 @@
 {
   "name": "nested-sortable-dnd",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "nested-sortable-dnd React component",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",

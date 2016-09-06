@@ -4,13 +4,24 @@ import Styles from "./Styles";
 
 export const TYPE = 'TreeNode';
 
+var targetPosition = props => props.insertBefore ? Styles.insertBeforeTarget : Styles.insertAfterTarget;
+
+var emptyNodeChildren = props => {
+  console.log(Styles.emptyNodeChildrenLeft);
+  if (props.emptyNodeChildrenPosition === 'Left') {
+    return Styles.emptyNodeChildrenLeft;
+  } else {
+    return Styles.emptyNodeChildrenRight;
+  }
+};
+
 const TreeViewInsertTarget = (props) =>
   props.connectDropTarget(
     <div
       style={
         Object.assign(
           {},
-          props.insertBefore ? Styles.insertBeforeTarget : Styles.insertAfterTarget,
+          props.emptyNodeChildrenPosition ? emptyNodeChildren(props) : targetPosition(props),
           props.canDrop ? Styles.insertTargetCanDrop : {},
           props.isDropping ? Styles.insertTargetDropping : {}
         )

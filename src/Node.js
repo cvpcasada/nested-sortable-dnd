@@ -3,14 +3,13 @@ import cx from "classnames";
 import React, {Component} from "react";
 import {DragSource} from "react-dnd";
 import {TYPE, DroppedTarget, DroppableTreeViewInsertTarget} from "./InsertTarget";
-
+import Styles from './Styles';
 const TreeViewItem = (props) => (
   props.connectDragSource(
     <div
       className={
         cx(props.classNames.node, {
           [props.classNames.nodeDragging]: props.isDragging,
-          [props.classNames.nodeDropping]: props.isDropping
         }) }
       key={ props.node.id }
     >
@@ -59,7 +58,9 @@ export const DraggableTreeViewItem = DragSource(TYPE, nodeSource, collectNodeDra
 
 const DroppableTreeViewItem = DroppedTarget((props) => (
   props.connectDropTarget(
-    <DraggableTreeViewItem {...props} />
+    <div style={props.isDropping ? {background: 'blue'} : {}}>
+      <DraggableTreeViewItem {...props} />
+    </div>
   )
 ));
 
@@ -83,6 +84,7 @@ const nodesWithPredecessors = (nodes) => {
 // }
 
 export const TreeViewItemList = (props) => {
+  //console.log({nodes: props.nodes});
   const withPredecessors = nodesWithPredecessors(props.nodes);
   return (
     <div className={ props.classNames.nodeList }>
@@ -105,35 +107,48 @@ export const TreeViewItemList = (props) => {
                 : null
             }
 
-            <DroppableTreeViewInsertTarget
-              insertBefore={ false }
-              parentNode={ props.parentNode }
-              parentChildIndex={ index + 1 }
-              precedingNode={ node.node }
-              onMoveNode={ props.onMoveNode }
-            />
-            
             {
               (node.node.children && node.node.children.size === 0) ?
-                <DroppableTreeViewItem
-                  parentNode={ node.node }
-                  parentChildIndex={ index }
-                  precedingNode={ null }
-                  node={ node.node }
-                  classNames={ props.classNames }
-                  renderNode={ props.renderNode }
+                <div style={{
+                  ...Styles.insertAfterTarget,
+                  background: 'none',
+                  display: 'flex',
+                  flexDirection: 'row'
+                }}>
+                  <DroppableTreeViewInsertTarget
+                    emptyNodeChildrenPosition="Left"
+                    parentNode={ props.parentNode }
+                    parentChildIndex={ index + 1 }
+                    precedingNode={ node.node }
+                    onMoveNode={ props.onMoveNode }
+                  />
+                  <DroppableTreeViewInsertTarget
+                    emptyNodeChildrenPosition="Right"
+                    parentNode={ node.node }
+                    parentChildIndex={ index + 1 }
+                    precedingNode={ null }
+                    onMoveNode={ props.onMoveNode }
+                  />
+                </div>:
+                <DroppableTreeViewInsertTarget
+                  insertBefore={ false }
+                  parentNode={ props.parentNode }
+                  parentChildIndex={ index + 1 }
+                  precedingNode={ node.node }
                   onMoveNode={ props.onMoveNode }
                 />
-                : <DraggableTreeViewItem
-                parentNode={ props.parentNode }
-                parentChildIndex={ index }
-                precedingNode={ node.precedingNode }
-                node={ node.node }
-                classNames={ props.classNames }
-                renderNode={ props.renderNode }
-                onMoveNode={ props.onMoveNode }
-              />
             }
+
+
+            <DraggableTreeViewItem
+              parentNode={ props.parentNode }
+              parentChildIndex={ index }
+              precedingNode={ node.precedingNode }
+              node={ node.node }
+              classNames={ props.classNames }
+              renderNode={ props.renderNode }
+              onMoveNode={ props.onMoveNode }
+            />
           </div>
         )
       }

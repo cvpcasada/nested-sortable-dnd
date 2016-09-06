@@ -7,7 +7,7 @@ export const NormalStyles = {
     height: "1em",
     position: "absolute",
     zIndex: 1,
-    display: "none",
+    display: "none"
   },
 
   insertBeforeTarget: {
@@ -29,7 +29,7 @@ export const NormalStyles = {
     width: "100%",
     height: "3px",
     borderRadius: "2px",
-    background: "linear-gradient(90deg, gray, white)",
+    background: "#5C5C61",
     alignSelf: "center",
   }
 };
@@ -85,5 +85,15 @@ export default {
     isDebug ? DebugStyles.insertTargetDropping : {}
   ),
 
-  insertTargetMarkerDropping: NormalStyles.insertTargetMarkerDropping
+  insertTargetMarkerDropping: NormalStyles.insertTargetMarkerDropping,
+
+  emptyNodeChildrenLeft: {
+    boxSizing: "border-box",
+    width: "4em"
+  },
+
+  emptyNodeChildrenRight: {
+    boxSizing: "border-box",
+    width: "calc(100% - 2em)"
+  },
 }

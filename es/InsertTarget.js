@@ -23,7 +23,9 @@ var TreeViewInsertTarget = function TreeViewInsertTarget(props) {
     {
       style: Object.assign({}, props.emptyNodeChildrenPosition ? emptyNodeChildren(props) : targetPosition(props), props.canDrop ? Styles.insertTargetCanDrop : {}, props.isDropping ? Styles.insertTargetDropping : {})
     },
-    React.createElement("div", { style: props.isDropping ? Styles.insertTargetMarkerDropping : {} })
+    React.createElement("div", {
+      className: props.isDropping && props.classNames && props.classNames.insertTargetMarkerDropping,
+      style: props.isDropping && !(props.classNames && props.classNames.insertTargetMarkerDropping) ? Styles.insertTargetMarkerDropping : {} })
   ));
 };
 

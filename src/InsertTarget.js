@@ -27,7 +27,9 @@ const TreeViewInsertTarget = (props) =>
         )
       }
     >
-      <div style={ props.isDropping ? Styles.insertTargetMarkerDropping : {} }/>
+      <div
+        className={props.isDropping && props.classNames && props.classNames.insertTargetMarkerDropping }
+        style={ props.isDropping && !(props.classNames && props.classNames.insertTargetMarkerDropping) ? Styles.insertTargetMarkerDropping : {} }/>
     </div>
   );
 

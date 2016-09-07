@@ -115,7 +115,7 @@ export const TreeViewItemList = (props) => {
             />
 
             {
-              (node.node.children && node.node.children.size === 0) ?
+              (props.allowInsertToNode && node.node.children && node.node.children.size === 0) ?
                 <DroppableTreeViewItem
                   parentNode={node.node}
                   parentChildIndex={index + 1}

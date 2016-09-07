@@ -108,7 +108,7 @@ export var TreeViewItemList = function TreeViewItemList(props) {
           precedingNode: node.node,
           onMoveNode: props.onMoveNode
         }),
-        node.node.children && node.node.children.size === 0 ? React.createElement(DroppableTreeViewItem, {
+        props.allowInsertToNode && node.node.children && node.node.children.size === 0 ? React.createElement(DroppableTreeViewItem, {
           parentNode: node.node,
           parentChildIndex: index + 1,
           precedingNode: null,

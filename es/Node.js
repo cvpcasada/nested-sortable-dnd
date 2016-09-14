@@ -47,6 +47,9 @@ var nodeSource = {
       parentChildIndex: props.parentChildIndex,
       precedingNode: props.precedingNode
     };
+  },
+  canDrag: function canDrag(props, monitor) {
+    return !props.node.lock || !props.lock;
   }
 };
 
@@ -126,6 +129,7 @@ export var TreeViewItemList = function TreeViewItemList(props) {
           parentNode: props.parentNode,
           parentChildIndex: index,
           precedingNode: node.precedingNode,
+          lock: props.lock,
           node: node.node,
           classNames: props.classNames,
           renderNode: props.renderNode,

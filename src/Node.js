@@ -47,6 +47,7 @@ const nodeSource = {
     parentChildIndex: props.parentChildIndex,
     precedingNode: props.precedingNode,
   }),
+  canDrag: (props, monitor) => !props.node.lock
 };
 
 const collectNodeDragProps = (connect, monitor) => ({

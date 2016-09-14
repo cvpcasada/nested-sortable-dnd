@@ -61,6 +61,7 @@ export class App extends Component {
         {
           id: "C",
           title: "C",
+          lock: true,
           children: Immutable.List([
             {
               id: "C1",

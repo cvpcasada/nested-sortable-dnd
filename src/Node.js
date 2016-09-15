@@ -24,6 +24,7 @@ const TreeViewItem = props => (
             { props.node.children
               ? <TreeViewItemList
               parentNode={ props.node }
+              lock={props.lock}
               nodes={ props.node.children }
               classNames={ props.classNames }
               renderNode={ props.renderNode }
@@ -47,7 +48,9 @@ const nodeSource = {
     parentChildIndex: props.parentChildIndex,
     precedingNode: props.precedingNode,
   }),
-  canDrag: (props, monitor) => !props.node.lock || !props.lock
+  canDrag: (props, monitor) => {
+    return props.lock ? false : !props.node.lock
+  }
 };
 
 const collectNodeDragProps = (connect, monitor) => ({
@@ -123,10 +126,12 @@ export const TreeViewItemList = (props) => {
                   precedingNode={null}
                   onMoveNode={props.onMoveNode}
                   classNames={props.classNames}
+
                   nodeOptions={{
                     parentNode: props.parentNode,
                     parentChildIndex: index,
                     precedingNode: node.precedingNode,
+                    lock: props.lock,
                     node: node.node,
                     renderNode: props.renderNode
                   }}

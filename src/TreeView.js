@@ -5,6 +5,7 @@ const TreeView =
   ({allowInsertToNode = true, ...props}) => (
     <div className={ props.classNames.treeView }>
       <TreeViewItemList
+        lock={props.lock}
         parentNode={ null }
         nodes={ props.rootNodes }
         renderNode={ props.renderNode }

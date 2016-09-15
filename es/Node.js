@@ -25,6 +25,7 @@ var TreeViewItem = function TreeViewItem(props) {
       { className: props.classNames.nodeChildren },
       props.node.children ? React.createElement(TreeViewItemList, {
         parentNode: props.node,
+        lock: props.lock,
         nodes: props.node.children,
         classNames: props.classNames,
         renderNode: props.renderNode,
@@ -49,7 +50,7 @@ var nodeSource = {
     };
   },
   canDrag: function canDrag(props, monitor) {
-    return !props.node.lock || !props.lock;
+    return props.lock ? false : !props.node.lock;
   }
 };
 
@@ -117,10 +118,12 @@ export var TreeViewItemList = function TreeViewItemList(props) {
           precedingNode: null,
           onMoveNode: props.onMoveNode,
           classNames: props.classNames,
+
           nodeOptions: {
             parentNode: props.parentNode,
             parentChildIndex: index,
             precedingNode: node.precedingNode,
+            lock: props.lock,
             node: node.node,
             renderNode: props.renderNode
           }

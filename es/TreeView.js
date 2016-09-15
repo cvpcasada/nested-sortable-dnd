@@ -13,6 +13,7 @@ var TreeView = function TreeView(_ref) {
     "div",
     { className: props.classNames.treeView },
     React.createElement(TreeViewItemList, {
+      lock: props.lock,
       parentNode: null,
       nodes: props.rootNodes,
       renderNode: props.renderNode,

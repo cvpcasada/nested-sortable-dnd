@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Immutable from 'immutable';
 import {render} from 'react-dom'
 import {DragDropContext} from 'react-dnd';
 import HTML5DragDropBackend from 'react-dnd-html5-backend';
@@ -10,11 +9,9 @@ import styles from './styles.css';
 
 const recursivelyUpdateNode = (node, listUpdateFunc, nodeUpdateFunc) => {
 
-
   const updateChildren = node.children
     ? recursivelyUpdateList(node.children, node, listUpdateFunc, nodeUpdateFunc)
     : node.children;
-
 
   if (updateChildren !== node.children) {
     node = {
@@ -27,9 +24,11 @@ const recursivelyUpdateNode = (node, listUpdateFunc, nodeUpdateFunc) => {
 
 const recursivelyUpdateList = (list, parentNode, listUpdateFunc, nodeUpdateFunc) => {
   const mappedItems = list.map(item => recursivelyUpdateNode(item, listUpdateFunc, nodeUpdateFunc));
-  if (!Immutable.is(mappedItems, list)) {
+
+  if (!mappedItems.every((item, index) => Object.is(item, list[index]))) {
     list = list.map(item => recursivelyUpdateNode(item, listUpdateFunc, nodeUpdateFunc))
   }
+
   return listUpdateFunc(list, parentNode);
 };
 
@@ -37,17 +36,16 @@ export class App extends Component {
   constructor() {
     super();
     this.state = {
-      rootNodes: Immutable.List([
+      rootNodes: [
         {
           id: "A",
           title: "A",
-          children: Immutable.List([
-          ])
+          children: []
         },
         {
           id: "B",
           title: "B",
-          children: Immutable.List([
+          children: [
             {
               id: "B1",
               title: "B1",
@@ -56,22 +54,20 @@ export class App extends Component {
               id: "B2",
               title: "B2",
             },
-          ])
+          ]
         },
         {
           id: "C",
           title: "C",
-          lock: true,
-          children: Immutable.List([
+          children: [
             {
               id: "C1",
               title: "C1",
-              children: Immutable.List([
-              ])
+              children: []
             },
-          ])
+          ]
         },
-      ])
+      ]
     }
   }
 
@@ -82,12 +78,11 @@ export class App extends Component {
         null,
         (list, parentNode) => {
           return parentNode === args.newParentNode && parentNode === args.oldParentNode
-            ? list.insert(args.newParentChildIndex, args.node)
-            .remove(args.oldParentChildIndex + (args.newParentChildIndex < args.oldParentChildIndex ? 1 : 0))
+            ? remove(args.oldParentChildIndex + (args.newParentChildIndex < args.oldParentChildIndex ? 1 : 0))(insert(args.newParentChildIndex, args.node, list)(list))
             : parentNode === args.newParentNode
-            ? list.insert(args.newParentChildIndex, args.node)
+            ? insert(args.newParentChildIndex, args.node)(list)
             : parentNode === args.oldParentNode
-            ? list.remove(args.oldParentChildIndex)
+            ? remove(args.oldParentChildIndex)(list)
             : list
         },
         item => item
@@ -114,7 +109,7 @@ export class App extends Component {
 
   renderNode = node => (
     <div className={ styles.nodeItem }>
-      { !node.children || node.children.isEmpty()
+      { !node.children || node.children === []
         ? null
         : <a
         style={{fontSize: "0.5em", verticalAlign: "middle"}}
@@ -146,3 +141,11 @@ export const DraggableApp = DragDropContext(
 
 
 render(<DraggableApp/>, document.querySelector('#demo'))
+
+function insert(start, item) {
+  return arr => [...arr.slice(0, start), item, ...arr.slice(start)];
+}
+
+function remove(index) {
+  return arr => arr.filter((_, i) => i !== index)
+}

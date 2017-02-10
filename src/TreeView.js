@@ -2,7 +2,7 @@ import React from "react";
 import {TreeViewItemList} from "./Node";
 
 const TreeView =
-  ({allowInsertToNode = true, ...props}) => (
+  ({...props}) => (
     <div className={ props.classNames.treeView }>
       <TreeViewItemList
         lock={props.lock}
@@ -11,7 +11,6 @@ const TreeView =
         renderNode={ props.renderNode }
         classNames={ props.classNames }
         onMoveNode={ props.onMoveNode }
-        allowInsertToNode={ allowInsertToNode }
       />
     </div>
   );

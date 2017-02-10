@@ -7,7 +7,6 @@ export const TYPE = 'TreeNode';
 var targetPosition = props => props.insertBefore ? Styles.insertBeforeTarget : Styles.insertAfterTarget;
 
 var emptyNodeChildren = props => {
-  console.log(Styles.emptyNodeChildrenLeft);
   if (props.emptyNodeChildrenPosition === 'Left') {
     return Styles.emptyNodeChildrenLeft;
   } else {
@@ -21,27 +20,26 @@ const TreeViewInsertTarget = (props) =>
       style={
         Object.assign(
           {},
-          props.emptyNodeChildrenPosition ? emptyNodeChildren(props) : targetPosition(props),
+          props.insertBefore ? Styles.insertBeforeTarget : Styles.insertAfterTarget,
           props.canDrop ? Styles.insertTargetCanDrop : {},
           props.isDropping ? Styles.insertTargetDropping : {}
         )
       }
-    >
-      <div
-        className={props.isDropping && props.classNames && props.classNames.insertTargetMarkerDropping }
-        style={ props.isDropping && !(props.classNames && props.classNames.insertTargetMarkerDropping) ? Styles.insertTargetMarkerDropping : {} }/>
+      >
+      <div style={ props.isDropping ? Styles.insertTargetMarkerDropping : {} } />
     </div>
   );
 
 const handleCanDrop = (props, monitor, item) => (
-  !(
-    props.parentNode === item.parentNode &&
-    (
-      props.parentChildIndex === item.parentChildIndex ||
-      props.parentChildIndex === item.parentChildIndex + 1
-    )
-  ) && !item.allSourceIDs.contains(props.parentNode ? props.parentNode.id : null)
-);
+    !(
+      props.parentNode === item.parentNode &&
+      (
+        props.parentChildIndex === item.parentChildIndex ||
+        props.parentChildIndex === item.parentChildIndex + 1
+      )
+    ) &&
+    !item.allSourceIDs.includes(props.parentNode ? props.parentNode.id : null)
+  );
 
 const handleDrop = (props, monitor, component, item) => {
   props.onMoveNode({
@@ -75,5 +73,4 @@ const collectNodeDropProps =
   });
 
 export const DroppedTarget = DropTarget([TYPE], nodeTarget, collectNodeDropProps);
-
 export const DroppableTreeViewInsertTarget = DroppedTarget(TreeViewInsertTarget);

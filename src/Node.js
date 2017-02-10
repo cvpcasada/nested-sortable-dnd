@@ -66,7 +66,8 @@ const nodeSource = {
     parentNode: props.parentNode,
     parentChildIndex: props.parentChildIndex,
     precedingNode: props.precedingNode,
-  })
+  }),
+  canDrag: (props, monitor) => !props.node.locked
 };
 
 const collectNodeDragProps = (connect, monitor) => ({
@@ -102,7 +103,7 @@ export const TreeViewItemList = (props) => {
       {
         withPredecessors.map((node, index) =>
           <div
-            key={ index }
+            key={ node.node.id }
             style={ {position: "relative"} }
             className={ props.classNames.nodePositioningWrapper }
           >

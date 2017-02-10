@@ -31,6 +31,10 @@ const TreeViewInsertTarget = (props) =>
   );
 
 const handleCanDrop = (props, monitor, item) => (
+    // block dropping if a prosp.node.noDrop === true
+    props.parentNode && !props.parentNode.noDrop &&
+    
+    // cannot drop to self
     !(
       props.parentNode === item.parentNode &&
       (
@@ -38,8 +42,10 @@ const handleCanDrop = (props, monitor, item) => (
         props.parentChildIndex === item.parentChildIndex + 1
       )
     ) &&
+    
+    // you cannot drop on self nodes
     !item.allSourceIDs.includes(props.parentNode ? props.parentNode.id : null)
-  );
+  )
 
 const handleDrop = (props, monitor, component, item) => {
   props.onMoveNode({

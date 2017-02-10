@@ -40,7 +40,9 @@ export class App extends Component {
         {
           id: "A",
           title: "A",
-          children: []
+          children: [],
+          noDrop: true,  // items cannot be dropped into this
+          locked: true // you cannot drag this item.
         },
         {
           id: "B",

@@ -1,6 +1,6 @@
 {
   "name": "nested-sortable-dnd",
-  "version": "1.0.13",
+  "version": "1.1.0",
   "description": "nested-sortable-dnd React component",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
@@ -13,23 +13,25 @@
   ],
   "scripts": {
     "build": "nwb build-react-component",
-    "clean": "nwb clean-module && nwb clean-demo",
+    "clean": "nwb clean-module && npm clean-demo",
     "start": "nwb serve-react-demo",
-    "test": "nwb test",
-    "test:coverage": "nwb test --coverage",
-    "test:watch": "nwb test --server"
+    "test": "nwb test-react",
+    "test:coverage": "nwb test-react --coverage",
+    "test:watch": "nwb test-react --server"
   },
   "peerDependencies": {
-    "classnames": "^2.2.5",
-    "immutable": "^3.8.1",
     "react": "15.x",
-    "react-dnd": "^2.2.3"
+    "react-dom": "15.x"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "react-dnd": "^2.2.3",
+    "react-dnd-html5-backend": "^2.2.3"
   },
   "devDependencies": {
-    "nwb": "0.12.x",
+    "nwb": "0.15.x",
     "react": "^15.4.2",
-    "react-dnd-html5-backend": "^2.1.2",
-    "react-dom": "^15.3.1"
+    "react-dom": "^15.4.2"
   },
   "author": "Cyrus Venn Casada",
   "homepage": "https://github.com/cvpcasada/",

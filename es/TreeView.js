@@ -4,10 +4,7 @@ import React from "react";
 import { TreeViewItemList } from "./Node";
 
 var TreeView = function TreeView(_ref) {
-  var _ref$allowInsertToNod = _ref.allowInsertToNode;
-  var allowInsertToNode = _ref$allowInsertToNod === undefined ? true : _ref$allowInsertToNod;
-
-  var props = _objectWithoutProperties(_ref, ["allowInsertToNode"]);
+  var props = _objectWithoutProperties(_ref, []);
 
   return React.createElement(
     "div",
@@ -18,8 +15,7 @@ var TreeView = function TreeView(_ref) {
       nodes: props.rootNodes,
       renderNode: props.renderNode,
       classNames: props.classNames,
-      onMoveNode: props.onMoveNode,
-      allowInsertToNode: allowInsertToNode
+      onMoveNode: props.onMoveNode
     })
   );
 };

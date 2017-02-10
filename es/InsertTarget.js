@@ -9,7 +9,6 @@ var targetPosition = function targetPosition(props) {
 };
 
 var emptyNodeChildren = function emptyNodeChildren(props) {
-  console.log(Styles.emptyNodeChildrenLeft);
   if (props.emptyNodeChildrenPosition === 'Left') {
     return Styles.emptyNodeChildrenLeft;
   } else {
@@ -21,16 +20,23 @@ var TreeViewInsertTarget = function TreeViewInsertTarget(props) {
   return props.connectDropTarget(React.createElement(
     "div",
     {
-      style: Object.assign({}, props.emptyNodeChildrenPosition ? emptyNodeChildren(props) : targetPosition(props), props.canDrop ? Styles.insertTargetCanDrop : {}, props.isDropping ? Styles.insertTargetDropping : {})
+      style: Object.assign({}, props.insertBefore ? Styles.insertBeforeTarget : Styles.insertAfterTarget, props.canDrop ? Styles.insertTargetCanDrop : {}, props.isDropping ? Styles.insertTargetDropping : {})
     },
-    React.createElement("div", {
-      className: props.isDropping && props.classNames && props.classNames.insertTargetMarkerDropping,
-      style: props.isDropping && !(props.classNames && props.classNames.insertTargetMarkerDropping) ? Styles.insertTargetMarkerDropping : {} })
+    React.createElement("div", { style: props.isDropping ? Styles.insertTargetMarkerDropping : {} })
   ));
 };
 
 var handleCanDrop = function handleCanDrop(props, monitor, item) {
-  return !(props.parentNode === item.parentNode && (props.parentChildIndex === item.parentChildIndex || props.parentChildIndex === item.parentChildIndex + 1)) && !item.allSourceIDs.contains(props.parentNode ? props.parentNode.id : null);
+  return (
+    // block dropping if a prosp.node.noDrop === true
+    props.parentNode && !props.parentNode.noDrop &&
+
+    // cannot drop to self
+    !(props.parentNode === item.parentNode && (props.parentChildIndex === item.parentChildIndex || props.parentChildIndex === item.parentChildIndex + 1)) &&
+
+    // you cannot drop on self nodes
+    !item.allSourceIDs.includes(props.parentNode ? props.parentNode.id : null)
+  );
 };
 
 var handleDrop = function handleDrop(props, monitor, component, item) {
@@ -69,5 +75,4 @@ var collectNodeDropProps = function collectNodeDropProps(connect, monitor) {
 };
 
 export var DroppedTarget = DropTarget([TYPE], nodeTarget, collectNodeDropProps);
-
 export var DroppableTreeViewInsertTarget = DroppedTarget(TreeViewInsertTarget);

@@ -32,7 +32,7 @@ const TreeViewInsertTarget = (props) =>
 
 const handleCanDrop = (props, monitor, item) => (
     // block dropping if a prosp.node.noDrop === true
-    props.parentNode && !props.parentNode.noDrop &&
+    (!props.parentNode || props.parentNode && !props.parentNode.noDrop) &&
     
     // cannot drop to self
     !(

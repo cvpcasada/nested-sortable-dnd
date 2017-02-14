@@ -8,7 +8,7 @@ const TreeView = ({ classNames = {}, ...props }) => (
       parentNode={null}
       nodes={props.rootNodes}
       renderNode={props.renderNode}
-      classNames={props.classNames}
+      classNames={classNames}
       onMoveNode={props.onMoveNode}
     />
   </div>

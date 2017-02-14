@@ -16,7 +16,7 @@ var TreeView = function TreeView(_ref) {
       parentNode: null,
       nodes: props.rootNodes,
       renderNode: props.renderNode,
-      classNames: props.classNames,
+      classNames: classNames,
       onMoveNode: props.onMoveNode
     })
   );

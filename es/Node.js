@@ -1,5 +1,3 @@
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 import cx from "classnames";
 import React, { Component } from "react";
 import { DragSource } from "react-dnd";
@@ -21,7 +19,6 @@ var TreeViewItem = function TreeViewItem(props) {
       precedingNode: null,
       onMoveNode: props.onMoveNode,
       renderNode: props.renderNode,
-
       classNames: props.classNames
     }) : React.createElement(
       "div",
@@ -45,12 +42,10 @@ var TreeViewItem = function TreeViewItem(props) {
 var DroppableTreeViewItemNode = DroppedTarget(function (props) {
   return props.connectDropTarget(React.createElement(
     "div",
-    { className: props.classNames && props.isDropping ? props.classNames.insertNodeDropping : null },
-    React.createElement(
-      "div",
-      null,
-      props.renderNode(props.parentNode)
-    )
+    {
+      className: props.classNames && props.isDropping ? props.classNames.insertNodeDropping : null
+    },
+    props.renderNode(props.parentNode)
   ));
 });
 
@@ -84,14 +79,6 @@ var collectNodeDragProps = function collectNodeDragProps(connect, monitor) {
 };
 
 export var DraggableTreeViewItem = DragSource(TYPE, nodeSource, collectNodeDragProps)(TreeViewItem);
-
-var DroppableTreeViewItem = DroppedTarget(function (props) {
-  return props.connectDropTarget(React.createElement(
-    "div",
-    { className: props.classNames && props.isDropping ? props.classNames.insertNodeDropping : null },
-    React.createElement(DraggableTreeViewItem, _extends({}, props.nodeOptions, { classNames: props.classNames, onMoveNode: props.onMoveNode }))
-  ));
-});
 
 var nodesWithPredecessors = function nodesWithPredecessors(nodes) {
   return nodes.map(function (node) {

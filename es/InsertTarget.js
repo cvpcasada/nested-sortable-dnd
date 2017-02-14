@@ -2,19 +2,7 @@ import React from "react";
 import { DropTarget } from "react-dnd";
 import Styles from "./Styles";
 
-export var TYPE = 'TreeNode';
-
-var targetPosition = function targetPosition(props) {
-  return props.insertBefore ? Styles.insertBeforeTarget : Styles.insertAfterTarget;
-};
-
-var emptyNodeChildren = function emptyNodeChildren(props) {
-  if (props.emptyNodeChildrenPosition === 'Left') {
-    return Styles.emptyNodeChildrenLeft;
-  } else {
-    return Styles.emptyNodeChildrenRight;
-  }
-};
+export var TYPE = "TreeNode";
 
 var TreeViewInsertTarget = function TreeViewInsertTarget(props) {
   return props.connectDropTarget(React.createElement(
@@ -22,7 +10,10 @@ var TreeViewInsertTarget = function TreeViewInsertTarget(props) {
     {
       style: Object.assign({}, props.insertBefore ? Styles.insertBeforeTarget : Styles.insertAfterTarget, props.canDrop ? Styles.insertTargetCanDrop : {}, props.isDropping ? Styles.insertTargetDropping : {})
     },
-    React.createElement("div", { style: props.isDropping ? Styles.insertTargetMarkerDropping : {} })
+    React.createElement("div", {
+      className: props.isDropping && props.classNames && props.classNames.insertTargetMarkerDropping,
+      style: props.isDropping ? Styles.insertTargetMarkerDropping : {}
+    })
   ));
 };
 
@@ -30,10 +21,8 @@ var handleCanDrop = function handleCanDrop(props, monitor, item) {
   return (
     // block dropping if a prosp.node.noDrop === true
     (!props.parentNode || props.parentNode && !props.parentNode.noDrop) &&
-
     // cannot drop to self
     !(props.parentNode === item.parentNode && (props.parentChildIndex === item.parentChildIndex || props.parentChildIndex === item.parentChildIndex + 1)) &&
-
     // you cannot drop on self nodes
     !item.allSourceIDs.includes(props.parentNode ? props.parentNode.id : null)
   );
@@ -58,8 +47,8 @@ var handleDrop = function handleDrop(props, monitor, component, item) {
 
 var nodeTarget = {
   drop: function drop(props, monitor, component) {
-    return monitor.didDrop() ? undefined // some child already handled drop
-    : handleDrop(props, monitor, component, monitor.getItem());
+    return monitor.didDrop() ? undefined : // some child already handled drop
+    handleDrop(props, monitor, component, monitor.getItem());
   },
   canDrop: function canDrop(props, monitor) {
     return handleCanDrop(props, monitor, monitor.getItem());

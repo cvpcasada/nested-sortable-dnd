@@ -80,7 +80,7 @@ export class App extends Component {
         null,
         (list, parentNode) => {
           return parentNode === args.newParentNode && parentNode === args.oldParentNode
-            ? remove(args.oldParentChildIndex + (args.newParentChildIndex < args.oldParentChildIndex ? 1 : 0))(insert(args.newParentChildIndex, args.node, list)(list))
+            ? remove(args.oldParentChildIndex + (args.newParentChildIndex < args.oldParentChildIndex ? 1 : 0))(insert(args.newParentChildIndex, args.node)(list))
             : parentNode === args.newParentNode
             ? insert(args.newParentChildIndex, args.node)(list)
             : parentNode === args.oldParentNode

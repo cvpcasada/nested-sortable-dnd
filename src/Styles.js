@@ -11,15 +11,15 @@ export const NormalStyles = {
   },
 
   insertBeforeTarget: {
-    top: "-0.5em",
+    top: "-0.5em"
   },
 
   insertAfterTarget: {
-    bottom: "-0.5em",
+    bottom: "-0.5em"
   },
 
   insertTargetCanDrop: {
-    display: "flex",
+    display: "flex"
   },
 
   insertTargetDropping: {},
@@ -29,29 +29,29 @@ export const NormalStyles = {
     width: "100%",
     height: "4px",
     background: "#B4B4B4",
-    alignSelf: "center",
+    alignSelf: "center"
   }
 };
 
 export const DebugStyles = {
   insertTarget: {
-    opacity: 0.5,
+    opacity: 0.5
   },
 
   insertTargetCanDrop: {},
 
   insertTargetDropping: {
-    opacity: 0.9,
+    opacity: 0.9
   },
 
   insertBeforeTarget: {
-    backgroundColor: "#ffffdd",
+    backgroundColor: "#ffffdd"
   },
 
   insertAfterTarget: {
-    backgroundColor: "#ffddff",
+    backgroundColor: "#ffddff"
   }
-}
+};
 
 const isDebug = false;
 
@@ -94,5 +94,5 @@ export default {
   emptyNodeChildrenRight: {
     boxSizing: "border-box",
     width: "calc(100% - 2em)"
-  },
-}
+  }
+};

@@ -1,14 +1,13 @@
-import cx from "classnames";
-import React, { Component } from "react";
-import { DragSource } from "react-dnd";
-import { TYPE, DroppedTarget, DroppableTreeViewInsertTarget } from "./InsertTarget";
-import Styles from "./Styles";
+import cx from 'classnames';
+import React, { Component } from 'react';
+import { DragSource } from 'react-dnd';
+import { TYPE, DroppedTarget, DroppableTreeViewInsertTarget } from './InsertTarget';
 
 var TreeViewItem = function TreeViewItem(props) {
   var _cx;
 
   return props.connectDragSource(React.createElement(
-    "div",
+    'div',
     {
       className: cx(props.classNames.node, (_cx = {}, _cx[props.classNames.nodeDragging] = props.isDragging, _cx)),
       key: props.node.id
@@ -21,12 +20,12 @@ var TreeViewItem = function TreeViewItem(props) {
       renderNode: props.renderNode,
       classNames: props.classNames
     }) : React.createElement(
-      "div",
+      'div',
       null,
       props.renderNode(props.node)
     ),
     !props.node.isCollapsed && React.createElement(
-      "div",
+      'div',
       { className: props.classNames.nodeChildren },
       props.node.children && props.node.children.length > 0 && React.createElement(TreeViewItemList, {
         parentNode: props.node,
@@ -41,7 +40,7 @@ var TreeViewItem = function TreeViewItem(props) {
 
 var DroppableTreeViewItemNode = DroppedTarget(function (props) {
   return props.connectDropTarget(React.createElement(
-    "div",
+    'div',
     {
       className: props.classNames && props.isDropping ? props.classNames.insertNodeDropping : null
     },
@@ -95,14 +94,14 @@ var nodesWithPredecessors = function nodesWithPredecessors(nodes) {
 export var TreeViewItemList = function TreeViewItemList(props) {
   var withPredecessors = nodesWithPredecessors(props.nodes);
   return React.createElement(
-    "div",
+    'div',
     { className: props.classNames.nodeList },
     withPredecessors.map(function (node, index) {
       return React.createElement(
-        "div",
+        'div',
         {
           key: node.node.id,
-          style: { position: "relative" },
+          style: { position: 'relative' },
           className: props.classNames.nodePositioningWrapper
         },
         index === 0 ? React.createElement(DroppableTreeViewInsertTarget, {

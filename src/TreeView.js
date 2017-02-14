@@ -1,8 +1,8 @@
-import React from "react";
-import { TreeViewItemList } from "./Node";
+import React from 'react';
+import { TreeViewItemList } from './Node';
 
-const TreeView = ({ ...props }) => (
-  <div className={props.classNames.treeView}>
+const TreeView = ({ classNames = {}, ...props }) => (
+  <div className={classNames.treeView}>
     <TreeViewItemList
       lock={props.lock}
       parentNode={null}

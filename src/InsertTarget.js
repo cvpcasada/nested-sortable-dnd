@@ -1,28 +1,26 @@
-import React from "react";
-import { DropTarget } from "react-dnd";
-import Styles from "./Styles";
+import React from 'react';
+import { DropTarget } from 'react-dnd';
+import cx from 'classnames';
+export const TYPE = 'TreeNode';
 
-export const TYPE = "TreeNode";
-
-const TreeViewInsertTarget = props => props.connectDropTarget(
-  <div
-    style={Object.assign(
-      {},
-      props.insertBefore ? Styles.insertBeforeTarget : Styles.insertAfterTarget,
-      props.canDrop ? Styles.insertTargetCanDrop : {},
-      props.isDropping ? Styles.insertTargetDropping : {}
-    )}
-  >
+const TreeViewInsertTarget = (
+  { insertBefore, canDrop, isDropping, classNames }
+) =>
+  props.connectDropTarget(
     <div
-      className={
-        props.isDropping &&
-          props.classNames &&
-          props.classNames.insertTargetMarkerDropping
-      }
-      style={props.isDropping ? Styles.insertTargetMarkerDropping : {}}
-    />
-  </div>
-);
+      className={cx(
+        insertBefore
+          ? classNames.insertBeforeTarget
+          : classNames.insertAfterTarget,
+        canDrop && classNames.insertTargetCanDrop,
+        isDropping && classNames.insertTargetDropping
+      )}
+    >
+      <div
+        className={cx(isDropping && classNames.insertTargetMarkerDropping)}
+      />
+    </div>
+  );
 
 const handleCanDrop = (props, monitor, item) =>
   // block dropping if a prosp.node.noDrop === true

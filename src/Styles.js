@@ -1,35 +1,35 @@
-import React from "react";
+import React from 'react';
 
 export const NormalStyles = {
   insertTarget: {
-    boxSizing: "border-box",
-    width: "100%",
-    height: "1em",
-    position: "absolute",
+    boxSizing: 'border-box',
+    width: '100%',
+    height: '1em',
+    position: 'absolute',
     zIndex: 1,
-    display: "none"
+    display: 'none'
   },
 
   insertBeforeTarget: {
-    top: "-0.5em"
+    top: '-0.5em'
   },
 
   insertAfterTarget: {
-    bottom: "-0.5em"
+    bottom: '-0.5em'
   },
 
   insertTargetCanDrop: {
-    display: "flex"
+    display: 'flex'
   },
 
   insertTargetDropping: {},
 
   insertTargetMarkerDropping: {
-    boxSizing: "border-box",
-    width: "100%",
-    height: "4px",
-    background: "#B4B4B4",
-    alignSelf: "center"
+    boxSizing: 'border-box',
+    width: '100%',
+    height: '4px',
+    background: '#B4B4B4',
+    alignSelf: 'center'
   }
 };
 
@@ -45,11 +45,11 @@ export const DebugStyles = {
   },
 
   insertBeforeTarget: {
-    backgroundColor: "#ffffdd"
+    backgroundColor: '#ffffdd'
   },
 
   insertAfterTarget: {
-    backgroundColor: "#ffddff"
+    backgroundColor: '#ffddff'
   }
 };
 
@@ -87,12 +87,12 @@ export default {
   insertTargetMarkerDropping: NormalStyles.insertTargetMarkerDropping,
 
   emptyNodeChildrenLeft: {
-    boxSizing: "border-box",
-    width: "4em"
+    boxSizing: 'border-box',
+    width: '4em'
   },
 
   emptyNodeChildrenRight: {
-    boxSizing: "border-box",
-    width: "calc(100% - 2em)"
+    boxSizing: 'border-box',
+    width: 'calc(100% - 2em)'
   }
 };

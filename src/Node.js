@@ -1,12 +1,11 @@
-import cx from "classnames";
-import React, { Component } from "react";
-import { DragSource } from "react-dnd";
+import cx from 'classnames';
+import React, { Component } from 'react';
+import { DragSource } from 'react-dnd';
 import {
   TYPE,
   DroppedTarget,
   DroppableTreeViewInsertTarget
-} from "./InsertTarget";
-import Styles from "./Styles";
+} from './InsertTarget';
 
 const TreeViewItem = props => props.connectDragSource(
   <div
@@ -103,7 +102,7 @@ export const TreeViewItemList = props => {
       {withPredecessors.map((node, index) => (
         <div
           key={node.node.id}
-          style={{ position: "relative" }}
+          style={{ position: 'relative' }}
           className={props.classNames.nodePositioningWrapper}
         >
           {index === 0

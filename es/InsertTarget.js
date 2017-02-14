@@ -1,18 +1,20 @@
-import React from "react";
-import { DropTarget } from "react-dnd";
-import Styles from "./Styles";
+import React from 'react';
+import { DropTarget } from 'react-dnd';
+import cx from 'classnames';
+export var TYPE = 'TreeNode';
 
-export var TYPE = "TreeNode";
-
-var TreeViewInsertTarget = function TreeViewInsertTarget(props) {
+var TreeViewInsertTarget = function TreeViewInsertTarget(_ref) {
+  var insertBefore = _ref.insertBefore,
+      canDrop = _ref.canDrop,
+      isDropping = _ref.isDropping,
+      classNames = _ref.classNames;
   return props.connectDropTarget(React.createElement(
-    "div",
+    'div',
     {
-      style: Object.assign({}, props.insertBefore ? Styles.insertBeforeTarget : Styles.insertAfterTarget, props.canDrop ? Styles.insertTargetCanDrop : {}, props.isDropping ? Styles.insertTargetDropping : {})
+      className: cx(insertBefore ? classNames.insertBeforeTarget : classNames.insertAfterTarget, canDrop && classNames.insertTargetCanDrop, isDropping && classNames.insertTargetDropping)
     },
-    React.createElement("div", {
-      className: props.isDropping && props.classNames && props.classNames.insertTargetMarkerDropping,
-      style: props.isDropping ? Styles.insertTargetMarkerDropping : {}
+    React.createElement('div', {
+      className: cx(isDropping && classNames.insertTargetMarkerDropping)
     })
   ));
 };

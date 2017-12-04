@@ -20,23 +20,23 @@
     "test:watch": "nwb test-react --server"
   },
   "peerDependencies": {
-    "react": "15.x",
-    "react-dom": "15.x"
+    "react": ">=15",
+    "react-dom": ">=15"
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "react-dnd": "^2.2.3",
-    "react-dnd-html5-backend": "^2.2.3"
+    "react-dnd": "^2.5.4",
+    "react-dnd-html5-backend": "^2.5.4"
   },
   "devDependencies": {
-    "nwb": "0.15.x",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "nwb": "0.20.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "author": "Cyrus Venn Casada",
-  "homepage": "https://github.com/cvpcasada/",
+  "homepage": "https://github.com/cvpcasada/nested-sortable-dnd",
   "license": "MIT",
-  "repository": "",
+  "repository": "https://github.com/cvpcasada/nested-sortable-dnd",
   "keywords": [
     "react-component"
   ]

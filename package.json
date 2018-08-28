@@ -2,9 +2,8 @@
   "name": "nested-sortable-dnd",
   "version": "1.2.0",
   "description": "nested-sortable-dnd React component",
-  "main": "lib/index.js",
-  "jsnext:main": "es/index.js",
-  "module": "es/index.js",
+  "main": "dist/nested-dnd.common.js",
+  "module": "dist/nested-dnd.es.js",
   "files": [
     "css",
     "es",
@@ -12,8 +11,8 @@
     "umd"
   ],
   "scripts": {
-    "build": "nwb build-react-component",
-    "clean": "nwb clean-module && npm clean-demo",
+    "clean": "rimraf dist",
+    "build": "npx rollup -c --environment BABEL_ENV:production",
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
@@ -24,14 +23,20 @@
     "react-dom": ">=15"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
+    "babel-runtime": "^6.26.0",
+    "classnames": "^2.2.6",
+    "react": "^16.4.2",
     "react-dnd": "^2.5.4",
     "react-dnd-html5-backend": "^2.5.4"
   },
   "devDependencies": {
-    "nwb": "0.20.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "babel-core": "^6.26.3",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-preset-react-app": "^3.1.2",
+    "prettier": "^1.13.7",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.65.0",
+    "rollup-plugin-babel": "^3.0.7"
   },
   "author": "Cyrus Venn Casada",
   "homepage": "https://github.com/cvpcasada/nested-sortable-dnd",

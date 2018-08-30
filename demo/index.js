@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { DragDropContext } from "react-dnd";
-import HTML5DragDropBackend from "react-dnd-html5-backend";
+import HTML5Backend from "react-dnd-html5-backend";
 
 import TreeView from "../dist/nested-dnd.es.js";
 
@@ -139,10 +139,7 @@ export class App extends Component {
   }
 }
 
-export const DraggableApp = DragDropContext(
-  HTML5DragDropBackend
-  // TouchDragDropBackend({ enableMouseEvents: true })
-)(App);
+const DraggableApp = DragDropContext(HTML5Backend)(App);
 
 render(<DraggableApp />, document.querySelector("#root"));
 

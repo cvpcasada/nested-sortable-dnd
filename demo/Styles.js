@@ -7,19 +7,19 @@ export const NormalStyles = {
     height: '1em',
     position: 'absolute',
     zIndex: 1,
-    display: 'none'
+    display: 'none',
   },
 
   insertBeforeTarget: {
-    top: '-0.5em'
+    top: '-0.5em',
   },
 
   insertAfterTarget: {
-    bottom: '-0.5em'
+    bottom: '-0.5em',
   },
 
   insertTargetCanDrop: {
-    display: 'flex'
+    display: 'flex',
   },
 
   insertTargetDropping: {},
@@ -29,33 +29,31 @@ export const NormalStyles = {
     width: '100%',
     height: '4px',
     background: '#B4B4B4',
-    alignSelf: 'center'
-  }
+    alignSelf: 'center',
+  },
 };
 
 export const DebugStyles = {
   insertTarget: {
-    opacity: 0.5
+    opacity: 0.5,
   },
 
   insertTargetCanDrop: {},
 
   insertTargetDropping: {
-    opacity: 0.9
+    opacity: 0.9,
   },
 
   insertBeforeTarget: {
-    backgroundColor: '#ffffdd'
+    backgroundColor: '#ffffdd',
   },
 
   insertAfterTarget: {
-    backgroundColor: '#ffddff'
-  }
+    backgroundColor: '#ffddff',
+  },
 };
 
-const isDebug = false;
-
-export default {
+export default isDebug => ({
   insertBeforeTarget: Object.assign(
     {},
     NormalStyles.insertTarget,
@@ -88,11 +86,11 @@ export default {
 
   emptyNodeChildrenLeft: {
     boxSizing: 'border-box',
-    width: '4em'
+    width: '4em',
   },
 
   emptyNodeChildrenRight: {
     boxSizing: 'border-box',
-    width: 'calc(100% - 2em)'
-  }
-};
+    width: 'calc(100% - 2em)',
+  },
+});

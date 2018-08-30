@@ -1,42 +1,64 @@
 .treeView {
-    font-family: Verdana;
-    border-right: 1px solid gray;
-    border-bottom: 1px solid gray;
+  font-family: Verdana;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
 }
 
 .nodeList {
-    border-left: 1px solid lightgray;
-    border-top: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-top: 1px solid lightgray;
 }
 
 .node {
-    border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 }
 
 .nodeItem {
-    padding: 0.3em;
+  padding: 0.3em;
 }
 
 .nodePositioningWrapper:last-child > .node {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .nodeDragging {
-    color: #eeeeee;
+  color: #eeeeee;
 }
 
 .nodeChildren {
-    padding-left: 1.2em;
+  padding-left: 1.2em;
 }
 
 .insertTargetMarkerDropping {
-    box-sizing: border-box;
-    width: 100%;
-    height: 4px;
-    background: green;
-    align-self: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 4px;
+  background: green;
+  align-self: center;
 }
 
 .insertNodeDropping {
-    background: green;
+  background: green;
+}
+
+.emptyNodeChildrenLeft {
+  box-sizing: border-box;
+  width: 4em;
+}
+
+.emptyNodeChildrenRight {
+  box-sizing: border-box;
+  width: calc(100% - 2em);
+}
+
+.insertTargetDropping {
+  opacity: 0.9;
+}
+
+.insertBeforeTarget {
+  background-color: #ffffdd;
+}
+
+.insertAfterTarget {
+  background-color: #ffddff;
 }

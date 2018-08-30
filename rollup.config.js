@@ -1,48 +1,48 @@
-import babel from "rollup-plugin-babel";
-import pkg from "./package.json";
+import babel from 'rollup-plugin-babel';
+import pkg from './package.json';
 
 const externalizeDependencies = pkg => {
   const external = [
     ...Object.keys(pkg.peerDependencies || {}),
-    ...Object.keys(pkg.dependencies || {})
+    ...Object.keys(pkg.dependencies || {}),
   ];
 
   if (external.length === 0) {
     return () => false;
   }
 
-  const pattern = new RegExp(`^(${external.join("|")})($|/)`);
+  const pattern = new RegExp(`^(${external.join('|')})($|/)`);
   return id => pattern.test(id);
 };
 
 export default {
-  input: "src/index.js",
+  input: 'src/index.js',
   external: externalizeDependencies(pkg),
   plugins: [
     babel({
-      exclude: "node_modules/**",
+      exclude: 'node_modules/**',
       babelrc: false,
       runtimeHelpers: true,
-      presets: ["react-app"],
+      presets: ['react-app'],
       plugins: [
         [
-          "transform-runtime",
-          { helpers: true, polyfill: false, regenerator: true }
-        ]
-      ]
-    })
+          'transform-runtime',
+          { helpers: true, polyfill: false, regenerator: true },
+        ],
+      ],
+    }),
   ],
   output: [
     {
       file: pkg.module,
-      format: "es"
+      format: 'es',
     },
     {
       file: pkg.main,
-      format: "cjs"
-    }
+      format: 'cjs',
+    },
   ],
   watch: {
-    include: "src/**"
-  }
+    include: 'src/**',
+  },
 };

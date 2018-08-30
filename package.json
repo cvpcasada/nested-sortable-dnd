@@ -13,7 +13,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "format": "prettier --single-quote --trailing-comma es5 --write '*.js' 'src/**/*.js' 'demo/*.js'",
-    "build": "npx rollup -c --environment BABEL_ENV:production"
+    "build": "rollup -c --environment BABEL_ENV:production"
   },
   "peerDependencies": {
     "react": ">=16",

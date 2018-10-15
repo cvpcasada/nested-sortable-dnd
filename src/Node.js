@@ -20,7 +20,7 @@ class TreeViewItem extends React.Component {
           })}
           key={props.node.id}
         >
-          {props.node.children && props.node.children.length === 0 ? (
+          {props.node.children ? (
             <DroppableTreeViewItemNode
               parentNode={props.node}
               parentChildIndex={0}

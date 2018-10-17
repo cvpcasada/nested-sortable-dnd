@@ -129,17 +129,6 @@ export function TreeViewItemList(props) {
             onMoveNode={props.onMoveNode}
           />
 
-          {index === withPredecessors.length - 1 ? (
-            <DroppableTreeViewInsertTarget
-              classNames={props.classNames}
-              insertBefore={false}
-              parentNode={props.parentNode}
-              parentChildIndex={index + 1}
-              precedingNode={node.node}
-              onMoveNode={props.onMoveNode}
-            />
-          ) : null}
-
           <DraggableTreeViewItem
             parentNode={props.parentNode}
             parentChildIndex={index}

@@ -1,6 +1,6 @@
 {
   "name": "nested-sortable-dnd",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "nested-sortable-dnd React component",
   "main": "dist/nested-dnd.common.js",
   "module": "dist/nested-dnd.es.js",
@@ -20,18 +20,17 @@
     "react-dom": ">=16"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
+    "@babel/runtime": "^7.1.2",
     "classnames": "^2.2.6",
-    "react-dnd": "3.0.2"
+    "react-dnd": "5.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-plugin-lodash": "^3.3.4",
-    "babel-preset-react-app": "^3.1.2",
+    "@babel/plugin-transform-runtime": "7.1.0",
+    "babel-preset-react-app": "5.0.4",
     "prettier": "^1.13.7",
     "rimraf": "^2.6.2",
-    "rollup": "^0.65.0",
-    "rollup-plugin-babel": "^3.0.7"
+    "rollup": "^0.66.6",
+    "rollup-plugin-babel": "^4.0.3"
   },
   "author": "Cyrus Venn Casada",
   "homepage": "https://github.com/cvpcasada/nested-sortable-dnd",

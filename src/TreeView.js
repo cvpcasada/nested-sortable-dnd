@@ -3,10 +3,10 @@ import { TreeViewItemList } from './Node';
 
 class TreeView extends React.Component {
   render() {
-    const { classNames, ...props } = this.props;
+    const { classNames, innerRef, ...props } = this.props;
 
     return (
-      <div className={classNames.treeView}>
+      <div ref={innerRef} className={classNames.treeView}>
         <TreeViewItemList
           lock={props.lock}
           parentNode={null}
@@ -20,4 +20,4 @@ class TreeView extends React.Component {
   }
 }
 
-export default TreeView;
+export default React.forwardRef((props, ref) => <TreeView {...props} innerRef={ref} /> );

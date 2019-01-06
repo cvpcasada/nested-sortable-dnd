@@ -120,23 +120,12 @@ export function TreeViewItemList(props) {
           style={{ position: 'relative' }}
           className={props.classNames.nodePositioningWrapper}
         >
-          {index === 0 ? (
-            <DroppableTreeViewInsertTarget
-              classNames={props.classNames}
-              insertBefore={true}
-              parentNode={props.parentNode}
-              parentChildIndex={index}
-              precedingNode={null}
-              onMoveNode={props.onMoveNode}
-            />
-          ) : null}
-
           <DroppableTreeViewInsertTarget
             classNames={props.classNames}
-            insertBefore={false}
+            insertBefore={true}
             parentNode={props.parentNode}
-            parentChildIndex={index + 1}
-            precedingNode={node.node}
+            parentChildIndex={index}
+            precedingNode={null}
             onMoveNode={props.onMoveNode}
           />
 
